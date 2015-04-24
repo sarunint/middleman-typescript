@@ -6,12 +6,14 @@ module Middleman
     option :target, 'ES5', 'Target version.(Default ES5)'
     option :no_implicit_any, true, 'Use --noImplicitAny option.(Default true)'
     option :js_lib_dir, 'lib', 'Set JavaScript library dir.'
+    option :module, 'amd', 'Set Module'
     def initialize(app, options_hash={}, &block)
       super
 
       app.set :typescript_dir, options.typescript_dir
       compile_options = ['--target', options.target]
       compile_options << '--noImplicitAny' if options.no_implicit_any
+      compile_options << '--module' << options.module
       app.set :typescript_compile_options, compile_options
       app.set :typescript_js_lib_dir, options.js_lib_dir
 
